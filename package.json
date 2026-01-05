@@ -1,0 +1,22 @@
+{
+  "name": "nse-options-platform",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "react": "npm --prefix client start",
+    "electron": "electron .",
+    "start": "concurrently -k \"npm run react\" \"wait-on http://localhost:3000 && npm run electron\"",
+    "build": "npm --prefix client run build",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "electron": "^28.3.3",
+    "pg": "^8.11.3",
+    "redis": "^4.7.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "wait-on": "^7.2.0",
+    "electron-builder": "^24.13.3"
+  }
+}
