@@ -1,38 +1,26 @@
-import React from 'react';
-
-export default function OptionChainTable({ data, viewMode, onRowClick }) {
-    if (!data || data.length === 0) {
-        return (
-            <div className="flex-1 flex items-center justify-center text-gray-500">
-                Option Chain will render here
-            </div>
-        );
-    }
-
+export default function TimeTravelBar({
+    isPlaying,
+    onPlay,
+    onPause,
+    onNext,
+    onPrev,
+    currentTime,
+}) {
     return (
-        <div className="flex-1 overflow-auto">
-            <table className="w-full text-xs font-mono">
-                <thead>
-                    <tr>
-                        <th>Strike</th>
-                        <th>CE LTP</th>
-                        <th>PE LTP</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map(row => (
-                        <tr
-                            key={row.strike_price}
-                            onClick={() => onRowClick(row)}
-                            className="cursor-pointer hover:bg-[#222]"
-                        >
-                            <td>{row.strike_price}</td>
-                            <td>{row.ce_ltp}</td>
-                            <td>{row.pe_ltp}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="flex items-center gap-3 px-4 py-2 border-b border-[#222]">
+            <button onClick={onPrev}>⏮</button>
+
+            {isPlaying ? (
+                <button onClick={onPause}>⏸</button>
+            ) : (
+                <button onClick={onPlay}>▶️</button>
+            )}
+
+            <button onClick={onNext}>⏭</button>
+
+            <div className="ml-4 text-sm font-mono text-gray-400">
+                {currentTime ? new Date(currentTime).toLocaleString() : '—'}
+            </div>
         </div>
     );
 }

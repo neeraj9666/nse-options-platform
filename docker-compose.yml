@@ -1,8 +1,26 @@
+version: "3.9"
 
 services:
-  db:
-    image: timescale/timescaledb:latest-pg15
+  postgres:
+    image: timescale/timescaledb:2.13.1-pg15
+    container_name: options_timescaledb
+    restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
+      POSTGRES_DB: options_platform
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    shm_size: 1gb
+
+  redis:
+    image: redis:7
+    container_name: options_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+volumes:
+  timescale_data:
