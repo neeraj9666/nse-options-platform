@@ -1,18 +1,26 @@
 {
-  "name": "nse-options-platform",
+  "name": "nse-options-orchestrator",
+  "version": "1.0.1",
   "private": true,
-  "version": "1.0.0",
+  "description": "Electron + Vite + React NSE Options Platform",
+  "main": "server/dist/main.js",
   "scripts": {
-    "db": "docker-compose up -d",
-    "db:down": "docker-compose down",
-    "react": "npm --prefix client start",
-    "electron": "npm --prefix server run electron",
-    "start": "concurrently -k \"npm run react\" \"wait-on http://localhost:3000 && npm run electron\"",
-    "build": "npm --prefix client run build",
-    "dist": "npm run build && npm --prefix server run dist"
+    "dev": "concurrently \"npm run build:watch\" \"npm run electron\"",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "electron": "wait-on http://localhost:5173 && electron ."
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "wait-on": "^7.2.0"
+    "wait-on": "^7.2.0",
+    "typescript": "^5.0.0",
+    "electron": "^39.2.7",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pg": "^8.11.3",
+    "zod": "^3.22.4",
+    "axios": "^1.6.0"
   }
 }

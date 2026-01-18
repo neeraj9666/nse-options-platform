@@ -1,4 +1,111 @@
-
+# Node modules
 node_modules/
+*/node_modules/
+
+# Build outputs
 dist/
+build/
+out/
+*/dist/
+*/build/
+*/out/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
 .env
+.env.local
+.env.*.local
+**/.env
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+*/desktop.ini
+**/*desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Backups and temporary files
+*.backup
+*.backup-*
+backup-*/
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Zip files
+*.zip
+
+# Database dumps
+*.sql
+*.dump
+db/
+
+# Test files
+test-*.js
+test-*.ts
+
+# Scripts (comment out if you want to keep)
+*.ps1
+!start.ps1
+!stop.ps1
+!restart-all.ps1
+
+# Old/unused directories
+insta python codes/
+CRITICAL_CODE_REVIEW/
+NSE_Options_Platform_Review/
+verification_bundle/
+emergency-fix-*/
+src/
+
+# Markdown drafts
+COMPLETE_CODE_*.md
+*_CHECKLIST.md
+*_GUIDE.txt
+*_REVIEW*.zip
+README-*.md
+!README.md
+
+# Specific unwanted files
+folder_tree_report.txt
+folderCreation.bat
+flyway.conf
+collect-code-*.ps1
+dump-all-files.ps1
+extract-critical-files.ps1
+fix-all-and-dump.ps1
+generate_refactor.py
+get_tree.ps1
+write_working_module.ps1
+create-verification-bundle.ps1
+emergency-install.ps1
+generate-missing-files.ps1
+quick-install.ps1
+start-simple.ps1
+
+# Build artifacts
+.tmp.driveupload/
+
+# Old files
+*.js.map
+PROJECT_STATUS.md
+SUMMARY.md
+old*.txt
