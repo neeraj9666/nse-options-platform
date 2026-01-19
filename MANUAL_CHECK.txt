@@ -1,0 +1,30 @@
+# SIMPLE MANUAL CHECK - Copy these commands one by one
+
+# 1. Check preload.ts size
+Get-Item server\src\preload.ts | Select-Object Name, Length
+
+# 2. Check if preload.js was compiled
+Get-Item server\dist\preload.js | Select-Object Name, Length
+
+# 3. Check preload has contextBridge
+Select-String -Path server\src\preload.ts -Pattern "contextBridge"
+
+# 4. Check preload has exposeInMainWorld
+Select-String -Path server\src\preload.ts -Pattern "exposeInMainWorld"
+
+# 5. Check if window.d.ts exists
+Test-Path client\src\types\window.d.ts
+
+# 6. Check if ControlBar exists
+Test-Path client\src\components\controls\ControlBar.tsx
+
+# 7. View first 20 lines of preload.js
+Get-Content server\dist\preload.js | Select-Object -First 20
+
+# EXPECTED RESULTS:
+# - preload.ts should be 3000+ bytes
+# - preload.js should be 2000+ bytes
+# - contextBridge should be found
+# - exposeInMainWorld should be found
+# - window.d.ts should exist (or create it)
+# - ControlBar.tsx should exist (or create it)

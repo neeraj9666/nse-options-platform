@@ -1,12 +1,12 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+
 const {
   playbackStep,
   getAvailableSymbols,
-  getAvailableExpiries,
   getAvailableDates,
+  getExpiriesByDate,
 } = require('./services/db.service');
-
 
 let mainWindow;
 
@@ -19,30 +19,25 @@ function createWindow() {
     },
   });
 
-  // React dev server
   mainWindow.loadURL('http://localhost:3000');
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
   console.log('🪟 Electron window created');
 }
 
-ipcMain.handle('playback-step', async (_, params) => {
-  return await playbackStep(params);
+app.whenReady().then(() => {
+  createWindow();
+  console.log('✅ Electron app ready');
 });
+
 ipcMain.handle('get-symbols', async () => getAvailableSymbols());
-ipcMain.handle('get-expiries', async (_, symbol) => getAvailableExpiries(symbol));
+
 ipcMain.handle('get-dates', async (_, params) =>
-  getAvailableDates(params.symbol, params.expiry)
+  getAvailableDates(params.symbol)
 );
 
-app.whenReady().then(() => {
-  console.log('✅ Electron app ready');
-  createWindow();
-});
+ipcMain.handle('get-expiries-by-date', async (_, params) =>
+  getExpiriesByDate(params.symbol, params.tradeDate)
+);
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
-});
+ipcMain.handle('playback-step', async (_, params) =>
+  playbackStep(params)
+);
