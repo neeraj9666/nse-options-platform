@@ -1,90 +1,131 @@
-# Node modules
+﻿# ============================================================================
+# NODE & NPM
+# ============================================================================
 node_modules/
 */node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+*/package-lock.json
+.pnpm-debug.log*
 
-# Build outputs
+# ============================================================================
+# BUILD OUTPUTS
+# ============================================================================
 dist/
 build/
 out/
 */dist/
 */build/
 */out/
+*.tsbuildinfo
 
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Environment variables
+# ============================================================================
+# ENVIRONMENT & SECRETS
+# ============================================================================
 .env
 .env.local
 .env.*.local
 **/.env
+!.env.example
 
-# OS files
+# ============================================================================
+# OPERATING SYSTEM
+# ============================================================================
 .DS_Store
 Thumbs.db
 desktop.ini
 */desktop.ini
 **/*desktop.ini
+**/desktop.ini
 
-# IDE
+# ============================================================================
+# IDE & EDITORS
+# ============================================================================
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+*.code-workspace
 
-# TypeScript
-*.tsbuildinfo
-tsconfig.tsbuildinfo
+# ============================================================================
+# LOGS
+# ============================================================================
+logs/
+*.log
+*.log.*
 
-# Backups and temporary files
+# ============================================================================
+# BACKUPS & TEMPORARY
+# ============================================================================
 *.backup
 *.backup-*
 backup-*/
+*.bak
 *.tmp
 *.temp
 tmp/
 temp/
+.tmp.driveupload/
 
-# Zip files
+# ============================================================================
+# ARCHIVES
+# ============================================================================
 *.zip
+*.rar
+*.7z
+*.tar.gz
 
-# Database dumps
+# ============================================================================
+# DATABASE
+# ============================================================================
 *.sql
 *.dump
+*.sqlite
+*.sqlite3
 db/
 
-# Test files
-test-*.js
-test-*.ts
-
-# Scripts (comment out if you want to keep)
+# ============================================================================
+# SCRIPTS & TOOLS (Keep essential ones)
+# ============================================================================
 *.ps1
 !start.ps1
 !stop.ps1
 !restart-all.ps1
+test-*.js
+test-*.ts
 
-# Old/unused directories
-insta python codes/
-CRITICAL_CODE_REVIEW/
-NSE_Options_Platform_Review/
-verification_bundle/
-emergency-fix-*/
-src/
-
-# Markdown drafts
+# ============================================================================
+# DOCUMENTATION DRAFTS
+# ============================================================================
 COMPLETE_CODE_*.md
 *_CHECKLIST.md
 *_GUIDE.txt
 *_REVIEW*.zip
+*_STATUS.md
 README-*.md
 !README.md
 
-# Specific unwanted files
+# ============================================================================
+# PROJECT-SPECIFIC
+# ============================================================================
+# Python scripts (if not needed)
+insta python codes/
+*.pyc
+__pycache__/
+
+# Review directories
+CRITICAL_CODE_REVIEW/
+NSE_Options_Platform_Review/
+verification_bundle/
+emergency-fix-*/
+
+# Old source
+src/
+
+# Specific files
 folder_tree_report.txt
 folderCreation.bat
 flyway.conf
@@ -100,12 +141,18 @@ emergency-install.ps1
 generate-missing-files.ps1
 quick-install.ps1
 start-simple.ps1
+optionChainTable.tsx
+useOptionChain.backup
+*.tsx.backup
+*.tsx.backup-*
+*.ts.backup-*
+not provided files codes.txt
+
+# Electron specific
+.electron/
+*.electron
 
 # Build artifacts
-.tmp.driveupload/
-
-# Old files
-*.js.map
-PROJECT_STATUS.md
-SUMMARY.md
-old*.txt
+client/client.zip
+server/server.zip
+server/client/
