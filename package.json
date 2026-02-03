@@ -3,11 +3,10 @@
     "version":  "1.0.1",
     "private":  true,
     "description":  "Electron + Vite + React NSE Options Platform",
-    "main":  "server/dist/main.js",
+    "main":  "server/src/main.js",
     "scripts":  {
-                    "dev":  "concurrently \"npm run build:watch\" \"npm run electron\"",
-                    "build":  "tsc -p tsconfig.json",
-                    "build:watch":  "tsc -p tsconfig.json --watch",
+                    "dev":  "concurrently \"npm run dev --prefix client\" \"npm run electron\"",
+                    "build":  "npm run build --prefix client",
                     "electron":  "wait-on http://localhost:5173 \u0026\u0026 electron ."
                 },
     "devDependencies":  {

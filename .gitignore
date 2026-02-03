@@ -124,6 +124,10 @@ emergency-fix-*/
 
 # Old source
 src/
+!client/src/
+!client/src/**
+!server/src/
+!server/src/**
 
 # Specific files
 folder_tree_report.txt
