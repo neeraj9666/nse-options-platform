@@ -7,5 +7,5 @@ SELECT
   strike_price,
   option_type,
   last(open_interest, time) AS oi
-FROM options_data
+FROM options_data_ht
 GROUP BY bucket, underlying_symbol, expiry_date, strike_price, option_type;

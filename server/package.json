@@ -1,10 +1,9 @@
 {
     "name": "nse-options-server",
     "version": "1.0.0",
-    "main": "dist/index.js",
+    "main": "src/main.js",
     "scripts": {
-        "build": "tsc",
-        "dev": "tsc && electron .",
+        "dev": "electron .",
         "start": "electron ."
     },
     "dependencies": {

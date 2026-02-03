@@ -14,8 +14,14 @@ export default function InstrumentDateExpiryBar({
 
     // Load instruments
     useEffect(() => {
-        window.api.getSymbols().then(setSymbols);
-    }, []);
+        if (!window.api) return;
+        window.api.getSymbols().then((result) => {
+            setSymbols(result);
+            if (!symbol && result?.length) {
+                onSymbolChange(result[0]);
+            }
+        });
+    }, [symbol, onSymbolChange]);
 
     // Load trading dates when symbol changes
     useEffect(() => {
@@ -25,10 +31,16 @@ export default function InstrumentDateExpiryBar({
         onExpiryChange(null);
         setExpiries([]);
 
-        window.api.getDates({ symbol }).then(d =>
-            setDates(d.map(x => new Date(x).toISOString().slice(0, 10)))
-        );
-    }, [symbol]);
+        if (!window.api) return;
+
+        window.api.getDates({ symbol }).then((d) => {
+            const formatted = d.map(x => new Date(x).toISOString().slice(0, 10));
+            setDates(formatted);
+            if (formatted.length) {
+                onDateChange(formatted[0]);
+            }
+        });
+    }, [symbol, onDateChange, onExpiryChange]);
 
     // Load expiries when date changes
     useEffect(() => {
@@ -36,18 +48,25 @@ export default function InstrumentDateExpiryBar({
 
         onExpiryChange(null);
 
+        if (!window.api) return;
+
         window.api
             .getExpiriesByDate({ symbol, tradeDate })
-            .then(e =>
-                setExpiries(e.map(x => new Date(x).toISOString().slice(0, 10)))
-            );
-    }, [symbol, tradeDate]);
+            .then((e) => {
+                const formatted = e.map(x => new Date(x).toISOString().slice(0, 10));
+                setExpiries(formatted);
+                if (formatted.length) {
+                    onExpiryChange(formatted[0]);
+                }
+            });
+    }, [symbol, tradeDate, onExpiryChange]);
 
     return (
         <div className="flex gap-4 px-4 py-2 border-b border-[#222] bg-[#0b0b0e]">
 
             {/* Instrument */}
             <select value={symbol} onChange={e => onSymbolChange(e.target.value)}>
+                <option value="" disabled>Select symbol</option>
                 {symbols.map(s => (
                     <option key={s} value={s}>{s}</option>
                 ))}

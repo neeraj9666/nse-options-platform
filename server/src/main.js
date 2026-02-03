@@ -6,6 +6,8 @@ const {
   getAvailableSymbols,
   getAvailableDates,
   getExpiriesByDate,
+  getAvailableTimestamps,
+  getSnapshot,
 } = require('./services/db.service');
 
 let mainWindow;
@@ -19,7 +21,14 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadURL('http://localhost:3000');
+  const devServerUrl = process.env.VITE_DEV_SERVER_URL;
+  if (devServerUrl) {
+    mainWindow.loadURL(devServerUrl);
+  } else {
+    mainWindow.loadFile(
+      path.join(__dirname, '../../client/dist/index.html')
+    );
+  }
   console.log('🪟 Electron window created');
 }
 
@@ -36,6 +45,14 @@ ipcMain.handle('get-dates', async (_, params) =>
 
 ipcMain.handle('get-expiries-by-date', async (_, params) =>
   getExpiriesByDate(params.symbol, params.tradeDate)
+);
+
+ipcMain.handle('get-timestamps', async (_, params) =>
+  getAvailableTimestamps(params.symbol, params.tradeDate, params.expiry)
+);
+
+ipcMain.handle('get-snapshot', async (_, params) =>
+  getSnapshot(params.symbol, params.expiry, new Date(params.timestamp))
 );
 
 ipcMain.handle('playback-step', async (_, params) =>
